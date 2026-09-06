@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import type { Booking, BookingStatus, PackSize, Paginated } from "../lib/types";
 import { BOOKING_STATUSES, PACK_SIZE_LABEL, STATUS_LABEL } from "../lib/types";
-import { api, getToken } from "../lib/api";
+import { API_BASE, api, getToken } from "../lib/api";
 
 export function OrdersPage() {
   const qc = useQueryClient();
@@ -40,7 +40,7 @@ export function OrdersPage() {
   async function exportCsv() {
     try {
       const token = getToken();
-      const res = await fetch(`/api/bookings/export?${qs}`, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
+      const res = await fetch(`${API_BASE}/api/bookings/export?${qs}`, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
       if (!res.ok) throw new Error("Export failed");
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);

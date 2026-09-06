@@ -8,7 +8,7 @@ config({ path: resolve(__dirname, "../.env") });
 const prisma = new PrismaClient();
 
 async function main() {
-  const email = process.env.SEED_ADMIN_EMAIL ?? "leo.a@example.org";
+  const email = process.env.SEED_ADMIN_EMAIL ?? "Aloknegi108@gmail.com";
   const password = process.env.SEED_ADMIN_PASSWORD ?? "ChangeMe123!";
   const name = process.env.SEED_ADMIN_NAME ?? "Kinnaur Super Admin";
   const passwordHash = await bcrypt.hash(password, 12);
@@ -24,7 +24,7 @@ async function main() {
     { key: "notifyEmail", value: "true" },
     { key: "notifyWhatsapp", value: "false" },
     { key: "whatsappNumber", value: "+919876543210" },
-    { key: "contactEmail", value: "xena.w@example.org" },
+    { key: "contactEmail", value: "Aloknegi108@gmail.com" },
   ];
 
   for (const setting of defaults) {
