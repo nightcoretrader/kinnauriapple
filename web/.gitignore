@@ -7,5 +7,5 @@ dist
 .env.local
 .DS_Store
 coverage
-# web/.vercel
+web/.vercel
 

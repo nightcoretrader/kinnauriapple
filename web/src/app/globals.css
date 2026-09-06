@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #b5282d;
+  --color-secondary: #5c7a4a;
+  --color-accent: #d89a3e;
+  --color-bg: #fbf4e9;
+}
+
+html {
+  scroll-behavior: auto;
+}
+html.lenis, html.lenis body {
+  height: auto;
+}
+body {
+  font-family: Inter, var(--font-deva), system-ui, sans-serif;
+  background: #fbf4e9;
+  color: #2e211a;
+}
+html[lang="hi"] body,
+html[lang="hi"] {
+  font-family: var(--font-deva), Inter, system-ui, sans-serif;
+}
+html[lang="hi"] h1,
+html[lang="hi"] h2,
+html[lang="hi"] h3,
+html[lang="hi"] .font-display {
+  font-family: var(--font-deva), Georgia, serif;
+}
+::selection { background: #f1b6a8; }
