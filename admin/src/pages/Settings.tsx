@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import type { AdminUser, AppSettings } from "../lib/types";
 import { api } from "../lib/api";
 import { useAuth } from "../lib/auth";
+import { PasswordInput } from "../components/PasswordInput";
 
 const settingsSchema = z.object({
   pricePerKg: z.coerce.number().min(1),
@@ -66,7 +67,7 @@ export function SettingsPage() {
           <form className="mt-6 grid gap-3 sm:grid-cols-2" onSubmit={userForm.handleSubmit((v) => addUser.mutate(v))}>
             <input placeholder="Name" className="rounded-brand bg-cream px-3 py-2" {...userForm.register("name")} />
             <input placeholder="Email" className="rounded-brand bg-cream px-3 py-2" {...userForm.register("email")} />
-            <input placeholder="Password" type="password" className="rounded-brand bg-cream px-3 py-2" {...userForm.register("password")} />
+            <PasswordInput placeholder="Password" {...userForm.register("password")} />
             <select className="rounded-brand bg-cream px-3 py-2" {...userForm.register("role")}>
               <option value="STAFF">Staff</option>
               <option value="SUPER_ADMIN">Super Admin</option>

@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Navigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../lib/auth";
+import { PasswordInput } from "../components/PasswordInput";
 
 const schema = z.object({ email: z.string().email(), password: z.string().min(8) });
 type Form = z.infer<typeof schema>;
@@ -27,7 +28,7 @@ export function LoginPage() {
         <input className="mt-1 w-full rounded-brand bg-cream px-3 py-2" {...register("email")} />
         {errors.email && <p className="text-xs text-primary">{errors.email.message}</p>}
         <label className="mt-4 block text-sm font-medium">Password</label>
-        <input type="password" className="mt-1 w-full rounded-brand bg-cream px-3 py-2" {...register("password")} />
+        <PasswordInput className="mt-1" {...register("password")} />
         {errors.password && <p className="text-xs text-primary">{errors.password.message}</p>}
         <button disabled={isSubmitting} className="mt-6 w-full rounded-brand bg-primary py-2.5 text-white">
           {isSubmitting ? "Signing in…" : "Sign in"}
