@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PackSize {
+  FIVE_KG
+  TEN_KG
+  FIFTEEN_KG
+  CUSTOM
+}
+
+enum BookingStatus {
+  NEW
+  CONTACTED
+  CONFIRMED
+  FULFILLED
+  CANCELLED
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  STAFF
+}
+
+model Booking {
+  id           String        @id @default(uuid())
+  fullName     String
+  phone        String
+  email        String?
+  pincode      String
+  city         String?
+  quantityKg   Int
+  packSize     PackSize      @default(CUSTOM)
+  notes        String?
+  status       BookingStatus @default(NEW)
+  source       String?       @default("landing_page")
+  internalNote String?
+  deletedAt    DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  activityLogs ActivityLog[]
+
+  @@index([status])
+  @@index([phone])
+  @@index([createdAt])
+  @@index([packSize])
+}
+
+model AdminUser {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         AdminRole @default(STAFF)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model ActivityLog {
+  id         String   @id @default(uuid())
+  bookingId  String?
+  booking    Booking? @relation(fields: [bookingId], references: [id])
+  action     String
+  actorEmail String
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([bookingId])
+}
+
+model AppSetting {
+  id    String @id @default(uuid())
+  key   String @unique
+  value String
+}
